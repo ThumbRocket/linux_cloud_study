@@ -1,0 +1,28 @@
+# test용 cgroup 생성
+sudo su
+cd /sys/fs/cgroup/pid (v2에서는 특정한 cgroup에서 전부 관리하므로 pid x)
+mkdir police
+cd police
+echo $$ > tasks (echo $$ > tasks (v2에서 /sys/fs/cgroup/cpu/cgroup.proc))
+
+******************
+cgroup v2에서의 PID 관리 위치:
+디렉토리 위치: /sys/fs/cgroup/<your_cgroup>
+PID 최대값 설정 파일: /sys/fs/cgroup/<your_cgroup>/pids.max
+현재 사용 중인 PID 수: /sys/fs/cgroup/<your_cgroup>/pids.current
+******************
+
+# 프로세스 생성 갯수 제한
+echo 10 > pids.max
+
+# fork bomb 실행 
+:(){ :|:& };:
+
+# 생성 프로세스 확인
+ps aux
+
+# 프로세스 생성 갯수 제한
+echo 20 > pids.max
+
+# 생성 프로세스 확인 
+ps aux
