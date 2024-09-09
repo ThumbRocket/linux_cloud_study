@@ -21,6 +21,7 @@ pip3 install faker
 python3 manage.py shell (dummy data를 만듬)
 import seeder
 seeder.seed_all(30)
+--> shell 종료 exit()
 
 # 로컬 서버 구동
 python3 manage.py runserver

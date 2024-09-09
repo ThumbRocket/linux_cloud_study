@@ -1,8 +1,12 @@
-
 # 폴 서비스 데이터베이스용 볼륨 생성
 docker volume create poll-db-volume
 docker volume ls
 docker volume inspect poll-db-volume
+
+$$ 권한 문제가 발생하는 경우
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
 
 # Postgresql 데이터베이스 컨테이너 실행
 docker run -p 5432:5432 --rm --name poll_db \
@@ -17,12 +21,12 @@ sudo apt install -y postgresql-client
 psql -h 127.0.0.1 -U fast -d poll
 ## poll=# \du
 
-# Django config 수정하기 
+# Django config 수정하기 (sql 데이터의 저장 위치와 dbengine를 변경)
 # projects/Django-Poll-App/pollme/settings.py
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql', (sql 데이터의 저장 위치와 dbengine를 변경)
         'NAME': 'poll',
         'USER': 'fast',
         'PASSWORD': '1234qwer',

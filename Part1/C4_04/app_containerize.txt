@@ -49,5 +49,4 @@ sudo ss -tulpn
 
 # 빌드된 이미지 실행 
 docker run -p 8000:8000 --rm --name poll poll_app
-
-
+docker run -p 8000:8000 --rm --name poll -d poll_app (back ground에서 돌릴 시)
