@@ -1,0 +1,43 @@
+version: "3"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - poll-db-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=poll
+      - POSTGRES_USER=fast
+      - POSTGRES_PASSWORD=1234qwer
+
+  app:
+    #image: poll_app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000"] # 디버깅 모드 들어가야 페이지 접속 가능
+    ports:
+      - 8000:8000
+      - 5678:5678   
+    volumes:
+      - ./:/app
+    environment:
+      - POSTGRES_DB=poll
+      - POSTGRES_USER=fast
+      - POSTGRES_PASSWORD=1234qwer
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+    
+  web:
+    image: poll_web
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+volumes:
+  poll-db-volume:
+    external: true
+    name:
+      poll-db-volume

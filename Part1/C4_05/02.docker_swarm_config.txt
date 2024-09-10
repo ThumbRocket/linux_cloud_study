@@ -85,7 +85,7 @@ docker-compose up
 """
         location / {
             # 실습에서는 host의 private ip 사용 ($ ip address show eth0)
-            proxy_pass              http://app:8000;  
+            proxy_pass              http://app:8000;  ---> 도커 컴포즈 내부에서 쓰이는 포트와 주소
             proxy_set_header        Host $host;
         }
 """
