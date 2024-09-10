@@ -16,7 +16,7 @@ source ~/.bashrc
 import os
 
 DATABASES = {
-    'default': {
+    'default': { # DATABASE 환경변수화
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
@@ -25,8 +25,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-"""
 
+# docker run -p 5432:5432 --rm --name poll_db \
+# -v poll-db-volume:/var/lib/postgresql/data \
+# -e POSTGRES_PASSWORD=1234qwer \
+# -e POSTGRES_USER=fast \
+# -e POSTGRES_DB=poll \
+# -d postgres
+
+"""
 # poll_app 이미지 새로 생성하기
 docker build --tag poll_app . 
 
@@ -67,7 +74,6 @@ volumes:
     external: true
     name:
       poll-db-volume
-
 """
 
 # docker compose 구동

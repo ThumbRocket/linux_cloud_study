@@ -24,7 +24,7 @@ docker run -d -p 8000:8000 --rm --name poll poll_app
 mkdir -p nginx/config && cd nginx
 
 # nginx config 파일 작성
-vim config/nginx.conf
+C4_02_Django_Server_Examplevim config/nginx.conf
 
 """
 events {
@@ -73,6 +73,6 @@ cd $PROJECT_ROOT
 docker build --tag poll_web -f nginx/Dockerfile .
 
 # 웹서버 실행
-docker run -rm -p 80:80 --name poll_web poll_web
+docker run --rm -p 80:80 --name poll_web poll_web
 
 # 브라우저에서 앱 동작 확인 
