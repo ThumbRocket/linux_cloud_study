@@ -1,5 +1,7 @@
 ## frontend 서비스 구성
 
+![alt text](image-1.png)
+
 1. nginx 설정에 환경 변수 사용을 위해 template 사용
 + nginx/config/nginx.conf 내용 수정
 ```
@@ -60,8 +62,9 @@ copilot init
 # Service name: poll-frontend
 # Dockerfile: ./Dockerfile.frontend
 ```
+coplit init -> Load Balanced Web Service -> name : poll-frontend 지정
 
-5. ELB 헬스체크를 지원하기 위해 헬스체크용 미들웨어 구성
+1. ELB 헬스체크를 지원하기 위해 헬스체크용 미들웨어 구성
 - polls/middleware.py 파일 생성
 ```
 from django.http import HttpResponse
@@ -109,11 +112,12 @@ copilot deploy
 + Invalid HTTP_HOST header 오류 확인 --> 트러블 슈팅
 
 10. pollme/settings.py 수정
+![alt text](image-2.png)
 ```
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.elb.amazonaws.com']
+ALLOWED_HOSTS = ['.elb.amazonaws.com'] # host allow 필요 (Django 보안)
 ```
 
 11. Poll backend 서비스 빌드/배포

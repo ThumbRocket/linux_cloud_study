@@ -1,5 +1,7 @@
 ## backend 서비스 구성
 
+![alt text](image.png)
+
 1. 프로젝트 루트 위치에 Dockerfile.backend 파일 생성
 ```
 FROM python:3.8-slim-buster
