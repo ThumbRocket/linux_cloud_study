@@ -1,4 +1,8 @@
 # systemd 실습 
+
+systemd와 관련된 내용 -> /sbin/init -> /lib/systemd/systemd
+unit(.service, target, ... 등 확장자) 파일 경로 : /lib/systemd/system/ or /etc/systemd/system
+
 1. 실행중인 서비스 목록 확인
 ```
 sudo systemctl list-units -t service
